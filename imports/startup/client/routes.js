@@ -14,6 +14,15 @@ FlowRouter.route('/', {
   }
 });
 
+FlowRouter.route('/calculator', {
+  name: 'calculator',
+  action() {
+    clearAllSessions();
+
+    BlazeLayout.render("mainLayout", { content: "Calculator" });
+  }
+});
+
 FlowRouter.route('/about', {
   name: 'about',
   action() {

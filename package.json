@@ -12,6 +12,8 @@
     "bcrypt": "^1.0.2",
     "chimp": "^0.47.1",
     "country-select-js": "^1.0.8",
+    "d3": "^4.10.0",
+    "d3-selection-multi": "^1.0.1",
     "meteor-node-stubs": "~0.2.0"
   },
   "devDependencies": {

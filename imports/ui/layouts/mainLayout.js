@@ -15,3 +15,4 @@ import '../viewPathwayButton/viewPathwayButton.js'
 import '../funding/funding.js';
 import '../definition/definition.js';
 import '../contact/contact.js';
+import '../calculator/calculator.js';

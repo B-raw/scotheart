@@ -123,6 +123,9 @@ body {
 
 .pad-checkboxes label {
   margin-right: 20px;
+}
+
+label {
   font-weight: normal;
 }
 
@@ -242,4 +245,9 @@ ul li {
 
 .insert-space-big-screen {
   margin-top: 50px;
+}
+
+/* Graph */
+#graphElement {
+ 
 }
