@@ -1,5 +1,5 @@
-export function CADRisk (age, gender, angina, tni) {
-  var points = 1/(1+Math.exp(-(-5.5219 + calculateAgePoints(age) + calculateGenderPoints(gender) + calculateAnginaPoints(angina) + calculateTNIPoints(tni) )));
+export function CADRisk (age, gender, angina, tni, assay) {
+  var points = 1/(1+Math.exp(-(-5.5219 + calculateAgePoints(age) + calculateGenderPoints(gender) + calculateAnginaPoints(angina) + calculateTNIPoints(tni, assay) )));
   var pointsPercentage = Math.floor(points * 10000) / 100;
   return pointsPercentage;
 }
@@ -37,11 +37,12 @@ function calculateAnginaPoints(angina) {
   }
 }
 
-function calculateTNIPoints(tni) {
-  if (tni > 7) {
-    return 2;
+function calculateTNIPoints(tni, assay) {
+  console.log(assay)
+  if (assay == "Singulex Erenna") {
+    return 0.30883 * Math.log2(tni);
   }
   else {
-    return 0.4455*Math.log(tni);
+    return 0.38612 * Math.log2(tni);
   }
 }

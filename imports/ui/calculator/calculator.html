@@ -2,7 +2,7 @@
     <div class="row">
       <div class="container">
       <div class="insert-space-big-screen hidden-xs hidden-sm"></div>
-      <div class="col-sm-3">
+      <div class="col-sm-3 top-buffer">
         <div class="form-group">
           <label for="baselineTroponin" class="form-questions">
             Age (years) = <span id="age-value">…</span>
@@ -44,16 +44,17 @@
             </label>
           </div>
         </div>
+
         <div class="form-group">
           <label for="troponinAssay" class="form-questions">
-            Troponin Assay
+            Troponin Assay = <span id="troponinAssay-value">…</span>
           </label>
           <div>
             <label for="troponinAssay" class="radio">
-              <input type="radio" name="troponinAssay" value="singulex"> Singulex Erenna hs-cTnI
+              <input type="radio" name="troponinAssay" value="Singulex Erenna"> Singulex Erenna hs-cTnI
             </label>
             <label for="troponinAssay" class="radio">
-              <input type="radio" name="troponinAssay" value="abbot"> Abbott Architect hs-cTnI
+              <input type="radio" name="troponinAssay" value="Abbott Architect"> Abbott Architect hs-cTnI
             </label>
           </div>
         </div>
@@ -67,7 +68,7 @@
             <p class="information-text collapse" id="troponinInformation">At the far right, "15" represents "15 and higher"</p>
           </label>
           <div>
-            <input type="range" min="0" max="15" value="1.5" step="0.1" id="tni">
+            <input type="range" min="0.1" max="15" value="1.5" step="0.1" id="tni">
           </div>
         </div>
       </div>

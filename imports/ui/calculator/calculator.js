@@ -2,14 +2,14 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base'
 import { Template } from 'meteor/templating';
 import './calculator.html';
-import { CADRisk } from './scotheart.js'
+import { CADRisk } from './scotheartFormula.js'
 import { ESCRisk } from './escformula.js'
 import * as d3 from "d3";
 import { getValueFromRadioButton } from '../helpers/getValueFromRadioButton'
 
 Template.Calculator.onRendered(function() {
-  let age, gender, angina, tni, cadScore, escScore;
-  cadScore = CADRisk(30, "male", "typical", 5)
+  let age, gender, angina, tni, cadScore, escScore, assay;
+  cadScore = CADRisk(30, "male", "typical", 5, "singulex")
   escScore = ESCRisk(30, "male", "typical", 5)
 
   this.find("#cadScore").innerHTML = cadScore;
@@ -100,22 +100,27 @@ Template.Calculator.onRendered(function() {
 //Event Listeners
   d3.select("#age").on("input", function() {
     age = this.value
-    update(age, gender, angina, tni);
+    update(age, gender, angina, tni, assay);
   });
 
   d3.select("#tni").on("input", function() {
     tni = this.value
-    update(age, gender, angina, tni);
+    update(age, gender, angina, tni, assay);
   });
 
   d3.selectAll("input[name='gender']").on("change", function() {
     gender = getValueFromRadioButton("gender")
-    update(age, gender, angina, tni);
+    update(age, gender, angina, tni, assay);
   });
 
   d3.selectAll("input[name='angina']").on("change", function() {
     angina = getValueFromRadioButton("angina")
-    update(age, gender, angina, tni);
+    update(age, gender, angina, tni, assay);
+  });
+
+  d3.selectAll("input[name='troponinAssay']").on("change", function() {
+    assay = getValueFromRadioButton("troponinAssay")
+    update(age, gender, angina, tni, assay);
   });
 
 // Initial starting age
@@ -123,9 +128,10 @@ Template.Calculator.onRendered(function() {
   gender = "male";
   angina = "atypical";
   tni = 1.5
-  update(age, gender, angina, tni)
+  assay = "singulex"
+  update(age, gender, angina, tni, assay)
 
-  function update(age, gender, angina, tni) {
+  function update(age, gender, angina, tni, assay) {
     d3.select("#age-value").text(age);
     d3.select("#age").property("value", age);
 
@@ -141,14 +147,16 @@ Template.Calculator.onRendered(function() {
     // }
     // d3.selectAll("input[name=tni]").property("value", tni);
 
+    d3.select("#troponinAssay-value").text(assay)
+
     d3.select("#angina-value").text(angina);
     d3.select("#angina").property("value", angina);
-    updateCadscore(age, gender, angina, tni)
+    updateCadscore(age, gender, angina, tni, assay)
     updateEscscore(age, gender, angina)
   }
 
-  function updateCadscore(age, gender, angina, tni) {
-    cadScore = CADRisk(age, gender, angina, tni)
+  function updateCadscore(age, gender, angina, tni, assay) {
+    cadScore = CADRisk(age, gender, angina, tni, assay)
 
     svg.select(".cadScoreBar")
       .data([cadScore])

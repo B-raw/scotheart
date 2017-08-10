@@ -106,7 +106,7 @@ body {
 .form-questions {
   color: #09A1E1;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 18px;
   margin: 6px 0;
 }
 
@@ -143,6 +143,10 @@ button.active-border {
 
 .wide-input {
   width: 150px;
+}
+
+label.radio {
+  padding-left: 20px;
 }
 
 /* LISTS */
@@ -249,5 +253,5 @@ ul li {
 
 /* Graph */
 #graphElement {
- 
+
 }
