@@ -128,7 +128,7 @@ Template.Calculator.onRendered(function() {
   gender = "male";
   angina = "atypical";
   tni = 1.5
-  assay = "singulex"
+  assay = "Abbot Architect"
   update(age, gender, angina, tni, assay)
 
   function update(age, gender, angina, tni, assay) {
