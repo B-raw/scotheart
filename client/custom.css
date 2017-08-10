@@ -1,0 +1,245 @@
+* {
+  /*border: 1px solid red;*/
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+/* GENERAL */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 15px;
+}
+
+.container {
+  box-sizing: border-box;
+}
+
+.top-buffer {
+  margin-top: 15px;
+}
+
+.upper-buffer {
+  margin-top: 50px;
+}
+
+.bottom-buffer {
+  margin-top: 50px;
+  padding-bottom: 110px;
+}
+
+.in-column-buffer {
+  margin-top: 20px;
+}
+
+.main-layout {
+  /*margin-bottom: 150px;*/
+
+}
+
+.jumbotron {
+  margin-top: 30px;
+}
+
+.jumbotron p {
+  font-size: 14px;
+}
+
+.jumbotron .larger-jumbotron-text {
+  font-size: 18px;
+}
+
+.space-fa {
+  margin-right: 8px;
+}
+
+/* TOP BAR */
+
+.back-button {
+  margin-top: 20px;
+}
+
+.navbar-logo {
+  height: 40px;
+  margin-top: -10px;
+}
+
+/* FRONTPAGE */
+
+.block-information {
+  display: block;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* FORMS */
+
+.input-buffer {
+  margin: 10px auto 0 auto;
+  width: 80px;
+}
+
+.upper-form-input-buffer {
+  margin-top: 10px;
+}
+
+.select-age-box {
+  width: 180px;
+  font-weight: normal;
+  margin: 10px auto 0 auto;
+}
+
+.select-specialty-box {
+  width: 280px;
+  font-weight: normal;
+  margin: 10px auto 0 auto;
+}
+
+.pad-select-left {
+  padding-left: 17px;
+}
+
+.form-questions {
+  color: #09A1E1;
+  font-weight: normal;
+  font-size: 24px;
+  margin: 6px 0;
+}
+
+.information-text {
+  color: grey;
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.pad-checkboxes label {
+  margin-right: 20px;
+  font-weight: normal;
+}
+
+.buttons-block-margin {
+  margin-bottom: 15px;
+}
+
+button.active-border {
+  border: 1px solid blue;
+}
+
+.narrow-input {
+  width: 70px;
+}
+
+.wide-input {
+  width: 150px;
+}
+
+/* LISTS */
+
+.unstyled-list-bullet {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  padding-left: 15px;
+}
+
+ul li {
+  padding-left: 10px;
+}
+
+/* FOOTER */
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /*height: 160px;*/
+  background-color: #d9edf7;
+  color: #31708f;
+  width: 100%;
+  border: 1px solid #d9edf7;
+  /*margin: 40px 0 0 0;*/
+  padding: 20px 20px 5px 20px;
+}
+
+.footer a {
+  color: #31708f;
+  font-size:15px;
+}
+
+.footer h3 {
+  margin-top: 0px;
+}
+
+.footer .container {
+  margin-top: 0;
+  height: 30px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.hr--small {
+  border-top: 1px solid #e0e0e0;
+  border-color: #bce8f1;
+}
+
+.footer .legal-links, .legal-links a {
+  font-size: 12px;
+}
+
+.footer-logos {
+  max-height: 60px;
+}
+
+/* ABOUT */
+
+.bhf-logo {
+  max-height: 140px;
+  margin: auto;
+}
+
+/* Sign up */
+
+.signup-panel {
+  padding: 10px 12px 0 12px;
+}
+
+.sign-up-logo {
+  max-height: 440px;
+}
+
+.high-steacs-logo-spacing {
+  margin-top: 150px;
+}
+
+#errors {
+  width: 250px;
+  margin: 8px auto 0 auto;
+  padding: 3px;
+}
+
+/* Login */
+
+.login-panel {
+  /*margin-top: 70px;*/
+}
+
+.login-logo-spacing {
+  margin-top: 70px;
+}
+
+.insert-space-big-screen {
+  margin-top: 50px;
+}

@@ -1,0 +1,39 @@
+<template name="Frontpage">
+  <div class="container">
+    <div class="jumbotron">
+      <div class="hidden-xs">
+        <img class="img-responsive" src="/high-STEACS-text.png" />
+      </div>
+      <div class="hidden-sm hidden-md hidden-lg hidden-xl">
+        <img class="img-responsive" src="/High-STEACS-acc-grey.png" />
+        <h4>High-sensitivity Troponin in the Evaluation of Patients with Acute Coronary Syndromes</h4>
+      </div>
+      <p class="in-column-buffer larger-jumbotron-text">This pathway is for patients with chest pain and suspected acute myocardial infarction evaluated using the Abbott high-sensitivity cardiac troponin I assay</p>
+      <div class="panel panel-danger in-column-buffer">
+        <div class="panel-heading text-center">
+          BETA TESTING VERSION
+        </div>
+        <div class="panel-body">
+          <p>This is a beta version of the High-STEACS web app, which is undergoing testing before its official release. The High-STEACS pathway has been developed and validated as part of a prospective clinical trial. The current version of this app is for educational use and evaluation (see <a href="/terms-conditions">Terms and Conditions</a>). Please refer to local guidelines.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-2 text-center in-column-buffer">
+          {{#if currentUser}}
+            <a href="/cases/new" class="btn btn-info btn-lg btn-display-block-sm" id="new-patient-loggedin">Log Case</a>
+          {{else}}
+            <a href="/login" class="btn btn-info btn-lg btn-display-block-sm" id="new-patient">Log Case</a>
+            <a href="/login" class="information-text block-information" id="signup-required">Log In Required</a>
+          {{/if}}
+        </div>
+        <div class="col-sm-4 text-center in-column-buffer">
+          <a href="/initial-assessment" class="btn btn-info btn-lg btn-display-block-sm" id="begin-assessment">Try Pathway</a>
+        </div>
+      </div>
+      <div class="row text-center">
+        <small class="information-text block-information" id="signup-required">Please refer to <a href="/privacy-policy">Privacy Policy</a> for details of data use and cookies</small>
+      </div>
+    </div>
+  </div>
+</template>

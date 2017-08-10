@@ -1,1 +1,1 @@
-# cardiac_algorithm
+# scotheart calculator

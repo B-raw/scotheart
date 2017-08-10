@@ -1,0 +1,52 @@
+/* Mobile Specific */
+
+@media (max-width: 480px) {
+  html {
+    position: relative;
+    min-height: 100%;
+  }
+  body {
+    /* Margin bottom by footer height */
+    /*margin-bottom: 260px;*/
+  }
+
+  .container {
+    padding: 0;
+    overflow-x: hidden;
+    margin: 10px 6px 0 6px;
+  }
+
+  .jumbotron {
+    margin-top: 0 6px 0 6px;
+  }
+
+  .footer {
+    margin: 20px 0 0 0;
+  }
+
+  .btn-display-block-sm {
+    display: block;
+  }
+}
+
+/* iPAD specific */
+
+
+@media screen and (min-width: 569px) and (max-width: 768px ) {
+  .jumbotron {
+    /*margin: 100px 6px 0 6px;*/
+    padding: 60px auto 60px auto;
+  }
+
+}
+
+@media screen and (min-width: 480px) and (max-width: 568px ) {
+  body {
+    /* Margin bottom by footer height */
+    /*margin-bottom: 260px;*/
+  }
+
+  .jumbotron {
+    margin: 20px 6px 0 6px;
+  }
+}

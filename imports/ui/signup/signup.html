@@ -1,0 +1,131 @@
+<template name="Signup">
+    <div class="row">
+
+      <div class="col-sm-5 col-sm-offset-1 hidden-xs text-center high-steacs-logo-spacing">
+        <img src="/high-STEACS-logo.png" class="img-responsive sign-up-logo" alt="high-STEACS logo">
+      </div>
+
+      <div class="container">
+      <div class="col-sm-6 text-center">
+        <h3> Sign Up </h3>
+        <form id="signup-form" class="register">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>About You</h4>
+            </div>
+            <div id="errors">
+
+            </div>
+            <div class="panel-body signup-panel">
+              <div class="form-group">
+                <label for="name">First Name</label>
+                <input type="name" class="form-control" id="firstName" placeholder="First Name" required/>
+              </div>
+              <div class="form-group">
+                <label for="name">Last Name</label>
+                <input type="name" class="form-control" id="lastName" placeholder="Last Name" required/>
+              </div>
+              <div class="form-group">
+                <label for="country">Country</label>
+                <input name="country" type="text" class="form-control" id="country"/>
+              </div>
+              <div class="form-group">
+                <label for="organisation">Hospital or Organisation Name</label>
+                <input type="text" name="organisation" class="form-control" id="organisation" placeholder="" required/>
+              </div>
+              <div class="form-group">
+                <label for="role">Role</label>
+                <div class="select-specialty-box" role="toolbar">
+                  <select class="form-control pad-select-left" name="role">
+                    <option value="" disabled selected hidden>Select role...</option>
+                    <option value="Physician">Physician</option>
+                    <option value="Nurse">Nurse</option>
+                    <option value="Researcher">Researcher</option>
+                    <option value="Hospital Manager">Hospital Manager</option>
+                    <option value="Industry">Industry</option>
+                    <option value="Clinical Scientist">Clinical Scientist</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label for="specialty">Specialty</label>
+                <div class="select-specialty-box" role="toolbar">
+                  <select class="form-control pad-select-left" name="specialty">
+                    <option value="" disabled selected hidden>Select specialty...</option>
+                    <option value="Emergency Medicine">Emergency Medicine</option>
+                    <option value="Internal Medicine">Internal Medicine</option>
+                    <option value="General Practice">General Practice</option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Clinical Chemistry">Clinical Chemistry</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4><i class="fa fa-lock space-fa" aria-hidden="true"></i>Your Secure High-STEACS Account</h4>
+            </div>
+            <div class="panel-body signup-panel">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required/>
+                <small id="emailHelp" class="form-text text-muted">Please consider giving your academic email address for data validation.</small><br>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                  <input type="{{showPassword}}" name="password" class="form-control" id="password" placeholder="Password" required/>
+                  <span class="input-group-addon" id="showPassword">
+                    {{ #if showNonSlashEye }}
+                      <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                    {{ else }}
+                      <i class="fa fa-eye" aria-hidden="true"></i>
+                    {{ /if }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h4>Submit Registration</h4>
+            </div>
+            <div class="panel-body signup-panel">
+              <div class="form-check">
+                <label class="form-check-label form-group">
+                  <div class="row signup-panel">
+                    <div class="col-xs-1">
+                      <input type="checkbox" class="form-check-input" id="tsAndCs" name="tsAndCs" required>
+                    </div>
+                    <div class="col-xs-10 text-left">
+                      You agree to the High-STEACS
+                      <a href="/terms-conditions" id="tsAndCsPage">Terms of Use</a> and <a href="/privacy-policy" id="privacyPolicy">Privacy Policy</a>,
+                      and the use of cookies as described therein, and also consent to the collection, storage and processing of your information in the United Kingdom where your personal data will be subject to United Kingdom law and where the level of data protection may be different than your country.
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-lg" id="login-submit">Submit</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- <div class="col-md-5 col-sm-offset-1 hidden-xl hidden-lg hidden-md bottom-sign-up-logo-spacing">
+        <img src="/high-STEACS-logo.png" class="img-responsive sign-up-logo" alt="high-STEACS logo">
+      </div> -->
+
+    </div>
+  </div>
+</template>

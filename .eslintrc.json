@@ -1,0 +1,32 @@
+{
+  "installedESLint": true,
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "allowImportExportEverywhere": true
+  },
+  "settings": {
+    "import/resolver": "meteor"
+  },
+  "plugins": [
+    "meteor"
+  ],
+  "extends": [
+    "airbnb",
+    "plugin:meteor/recommended"
+  ],
+  "env": {
+    "meteor": true,
+    "node": true,
+    "browser": true
+  },
+  "rules": {
+    "meteor/template-names": [2, "pascal-case"],
+    "meteor/no-session": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/extensions": [0, "meteor/meteor"],
+    "no-unused-vars": ["error", { "varsIgnorePattern": "Meteor" }]
+  },
+  "globals": {
+    "FlowRouter": true
+  }
+}
