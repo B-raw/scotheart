@@ -7,15 +7,24 @@ import { ESCRisk } from './escformula.js'
 import * as d3 from "d3";
 import { getValueFromRadioButton } from '../helpers/getValueFromRadioButton'
 
+var update;
+
 Template.Calculator.onRendered(function() {
   let age, gender, angina, tni, cadScore, escScore, assay;
-  cadScore = CADRisk(30, "male", "typical", 5, "singulex")
-  escScore = ESCRisk(30, "male", "typical", 5)
+  this.age = new ReactiveVar( 50 );
+  this.gender = new ReactiveVar( "male" );
+  this.angina = new ReactiveVar( "typical" )
+  this.tni = new ReactiveVar( 5 );
+  this.assay = new ReactiveVar( "Singulex Erenna" );
+  console.log(this.age)
+
+  cadScore = CADRisk(50, "male", "typical", 5, "Singulex Erenna")
+  escScore = ESCRisk(50, "male", "typical", 5)
 
   this.find("#cadScore").innerHTML = cadScore;
   this.find("#escScore").innerHTML = escScore;
 
-  var w = 300;
+  var w = 400;
 	var h = 350;
   var padding = 30;
 
@@ -97,55 +106,32 @@ Template.Calculator.onRendered(function() {
      .attr("transform", function() { return "translate(" + padding + ",0)"})
      .call(yAxis);
 
-//Event Listeners
-  d3.select("#age").on("input", function() {
-    age = this.value
-    update(age, gender, angina, tni, assay);
-  });
-
-  d3.select("#tni").on("input", function() {
-    tni = this.value
-    update(age, gender, angina, tni, assay);
-  });
-
-  d3.selectAll("input[name='gender']").on("change", function() {
-    gender = getValueFromRadioButton("gender")
-    update(age, gender, angina, tni, assay);
-  });
-
-  d3.selectAll("input[name='angina']").on("change", function() {
-    angina = getValueFromRadioButton("angina")
-    update(age, gender, angina, tni, assay);
-  });
-
-  d3.selectAll("input[name='troponinAssay']").on("change", function() {
-    assay = getValueFromRadioButton("troponinAssay")
-    update(age, gender, angina, tni, assay);
-  });
-
-// Initial starting age
-  age = 50;
-  gender = "male";
-  angina = "atypical";
-  tni = 1.5
-  assay = "Abbot Architect"
-  update(age, gender, angina, tni, assay)
-
-  function update(age, gender, angina, tni, assay) {
+  update = function(age, gender, angina, tni, assay) {
     d3.select("#age-value").text(age);
     d3.select("#age").property("value", age);
 
     d3.select("#gender-value").text(gender);
-    // d3.selectAll("input[name=gender]").property("checked", true);
 
     d3.select("#tni-value").text(tni);
-    // for(var i = 0; i < d3.selectAll("input[name=angina]")._groups.length; i++) {
-    //   var current_radio_button = d3.selectAll("input[name=angina]")._groups[i]
-    //   if (current_radio_button == tni) {
-    //     current_radio_button.checked==true;
-    //   }
-    // }
-    // d3.selectAll("input[name=tni]").property("value", tni);
+
+    d3.select("#troponinAssay-value").text(assay)
+
+    d3.select("#angina-value").text(angina);
+    d3.select("#angina").property("value", angina);
+    updateCadscore(age, gender, angina, tni, assay)
+    updateEscscore(age, gender, angina)
+  }
+
+// Initial starting age
+  update(this.age.get(), this.gender.get(), this.angina.get(), this.tni.get(), this.assay.get())
+
+  update = function(age, gender, angina, tni, assay) {
+    d3.select("#age-value").text(age);
+    d3.select("#age").property("value", age);
+
+    d3.select("#gender-value").text(gender);
+
+    d3.select("#tni-value").text(tni);
 
     d3.select("#troponinAssay-value").text(assay)
 
@@ -179,7 +165,26 @@ Template.Calculator.onRendered(function() {
 })
 
 Template.Calculator.events({
-
+  'change input[name="gender"]'(event, template) {
+    template.gender.set(getValueFromRadioButton("gender"));
+    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+  },
+  'change input[name="angina"]'(event, template) {
+    template.angina.set(getValueFromRadioButton("angina"));
+    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+  },
+  'change input[name="troponinAssay"]'(event, template) {
+    template.assay.set(getValueFromRadioButton("troponinAssay"));
+    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+  },
+  'input #age'(event, template) {
+    template.age.set(event.target.value)
+    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+  },
+  'input #tni'(event, template) {
+    template.tni.set(event.target.value)
+    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+  }
 });
 
 Template.Calculator.helpers({

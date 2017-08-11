@@ -38,7 +38,6 @@ function calculateAnginaPoints(angina) {
 }
 
 function calculateTNIPoints(tni, assay) {
-  console.log(assay)
   if (assay == "Singulex Erenna") {
     return 0.30883 * Math.log2(tni);
   }
