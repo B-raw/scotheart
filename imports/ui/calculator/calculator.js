@@ -15,7 +15,7 @@ Template.Calculator.onRendered(function() {
   this.find("#cadScore").innerHTML = cadScore;
   this.find("#escScore").innerHTML = escScore;
 
-  var w = 350;
+  var w = 300;
 	var h = 350;
   var padding = 30;
 

@@ -4,32 +4,41 @@
       <div class="insert-space-big-screen hidden-xs hidden-sm"></div>
       <div class="col-sm-3 top-buffer">
 
-        <div class="form-group">
-          <label for="baselineTroponin" class="form-questions">
-            Age (years) = <span id="age-value">…</span>
-          </label>
-          <div>
-            <input type="range" min="20" max="90" value="50" step="1" id="age">
+        <div class="row">
+          <div class="form-group">
+            <div>
+              <label for="baselineTroponin" class="form-questions">
+                Age (years) = <span id="age-value">…</span>
+              </label>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-xs-6 col-md-12">
+                <input type="range" min="20" max="90" value="50" step="1" id="age">
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="gender" class="form-questions">
-            Gender = <span id="gender-value">…</span>
-            <a href="#patientGenderInfo" data-toggle="collapse">
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </a>
-          </label>
-          <div>
-            <label for="gender" class="radio-inline">
-              <input type="radio" name="gender" value="male" checked="true"> Male
+        <div class="row">
+          <div class="form-group">
+            <label for="gender" class="form-questions">
+              Gender = <span id="gender-value">…</span>
+              <a href="#patientGenderInfo" data-toggle="collapse">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+              </a>
             </label>
-            <label for="gender" class="radio-inline">
-              <input type="radio" name="gender" value="female"> Female
-            </label>
+            <div class="btn-group col-lg-12" data-toggle="buttons">
+              <label for="gender" class="btn btn-primary active col-lg-6">
+                <input type="radio" name="gender" value="male" autocomplete="off" checked> Male
+              </label>
+              <label for="gender" class="btn btn-primary active col-lg-6">
+                <input type="radio" name="gender" value="female" autocomplete="off"> Female
+              </label>
+            </div>
+            <p class="information-text collapse" id="patientGenderInfo">This algorithm is optimised for the Abbott high-sensitivity cardiac troponin I assay with sex-specific thresholds (16 ng/L for women, 34 ng/L for men).</p>
           </div>
-          <p class="information-text collapse" id="patientGenderInfo">This algorithm is optimised for the Abbott high-sensitivity cardiac troponin I assay with sex-specific thresholds (16 ng/L for women, 34 ng/L for men).</p>
         </div>
+
 
         <div class="form-group">
           <label for="angina" class="form-questions">
@@ -70,7 +79,7 @@
             </a>
             <p class="information-text collapse" id="troponinInformation">At the far right, "15" represents "15 and higher"</p>
           </label>
-          <div>
+          <div class="col-sm-12 col-xs-6 col-md-12">
             <input type="range" min="0.1" max="15" value="1.5" step="0.1" id="tni">
           </div>
         </div>
