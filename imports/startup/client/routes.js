@@ -6,19 +6,8 @@ import { clearAllSessions } from "./helpers/clearSessionHelper"
 import '../../ui/layouts/mainLayout.js';
 
 FlowRouter.route('/', {
-  name: 'home',
-  action() {
-    clearAllSessions();
-
-    BlazeLayout.render("mainLayout", { content: "Frontpage" });
-  }
-});
-
-FlowRouter.route('/calculator', {
   name: 'calculator',
   action() {
-    clearAllSessions();
-
     BlazeLayout.render("mainLayout", { content: "Calculator" });
   }
 });

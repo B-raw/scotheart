@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+  import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base'
 import { Template } from 'meteor/templating';
 import './calculator.html';
@@ -9,21 +9,20 @@ import { getValueFromRadioButton } from '../helpers/getValueFromRadioButton'
 
 var update;
 
-Template.Calculator.onRendered(function() {
-  let age, gender, angina, tni, cadScore, escScore, assay;
+Template.Calculator.onCreated(function() {
+  let cadScore = CADRisk(50, "male", "typical", 5, "Singulex Erenna")
+  let escScore = ESCRisk(50, "male", "typical", 5)
+
   this.age = new ReactiveVar( 50 );
   this.gender = new ReactiveVar( "male" );
   this.angina = new ReactiveVar( "typical" )
   this.tni = new ReactiveVar( 5 );
   this.assay = new ReactiveVar( "Singulex Erenna" );
-  console.log(this.age)
+  this.cadScore = new ReactiveVar( cadScore )
+  this.escScore = new ReactiveVar( escScore)
+})
 
-  cadScore = CADRisk(50, "male", "typical", 5, "Singulex Erenna")
-  escScore = ESCRisk(50, "male", "typical", 5)
-
-  this.find("#cadScore").innerHTML = cadScore;
-  this.find("#escScore").innerHTML = escScore;
-
+Template.Calculator.onRendered(function() {
   var w = 400;
 	var h = 350;
   var padding = 30;
@@ -78,115 +77,103 @@ Template.Calculator.onRendered(function() {
                     .attr("height", yScale(85) - padding)
                     .attr("width", w - padding)
 
-  svg.selectAll("circle")
+//attach scotheart score
+  svg.selectAll("image")
     .select("b")
-    .data([cadScore])
+    .data([Template.instance().cadScore.get()])
     .enter()
-    .append("circle")
-    .attr("cx", function() { return w / 3 + 15; })
-    .attr("cy", function(d) { return yScale(d); })
-    .attr("r", function() { return 6; })
-    .attr("fill", "steelblue",)
+    .append("image")
+    .attr("href", "scotheart.png")
+    .attr("x", function() { return w / 3 + 15; })
+    .attr("y", function(d) { return yScale(d); })
+    .attr("height", 32)
+    .attr("width", 32)
     .attr("class", "cadScoreBar")
 
 //attach ESC score
-  svg.selectAll("circle")
+  svg.selectAll("image")
     .select("c")
-    .data([escScore])
+    .data([Template.instance().escScore.get()])
     .enter()
-    .append("circle")
-    .attr("cx", function() { return (2 * w) / 3 + 15; })
-    .attr("cy", function(d) { return yScale(d); })
-    .attr("r", function() { return 6; })
-    .attr("fill", "steelblue",)
-    .attr("class", "escScoreBar")
+    .append("image")
+    .attr("href", "ESClogo-32x32.png")
+    .attr("x", function() { return (2 * w) / 3 + 15; })
+    .attr("y", function(d) { return yScale(d); })
+    .attr("height", 32)
+    .attr("width", 32)
+    .attr("class", "escScoreBar");
 
   svg.append("g")
      .attr("class", "axis")
      .attr("transform", function() { return "translate(" + padding + ",0)"})
      .call(yAxis);
 
-  update = function(age, gender, angina, tni, assay) {
-    d3.select("#age-value").text(age);
-    d3.select("#age").property("value", age);
-
-    d3.select("#gender-value").text(gender);
-
-    d3.select("#tni-value").text(tni);
-
-    d3.select("#troponinAssay-value").text(assay)
-
-    d3.select("#angina-value").text(angina);
-    d3.select("#angina").property("value", angina);
-    updateCadscore(age, gender, angina, tni, assay)
-    updateEscscore(age, gender, angina)
+  update = function() {
+    updateCadscore()
+    updateEscscore()
   }
 
-// Initial starting age
-  update(this.age.get(), this.gender.get(), this.angina.get(), this.tni.get(), this.assay.get())
-
-  update = function(age, gender, angina, tni, assay) {
-    d3.select("#age-value").text(age);
-    d3.select("#age").property("value", age);
-
-    d3.select("#gender-value").text(gender);
-
-    d3.select("#tni-value").text(tni);
-
-    d3.select("#troponinAssay-value").text(assay)
-
-    d3.select("#angina-value").text(angina);
-    d3.select("#angina").property("value", angina);
-    updateCadscore(age, gender, angina, tni, assay)
-    updateEscscore(age, gender, angina)
-  }
-
-  function updateCadscore(age, gender, angina, tni, assay) {
-    cadScore = CADRisk(age, gender, angina, tni, assay)
+  function updateCadscore() {
+    Template.instance().cadScore.set(CADRisk(Template.instance().age.get(), Template.instance().gender.get(), Template.instance().angina.get(), Template.instance().tni.get(), Template.instance().assay.get()))
 
     svg.select(".cadScoreBar")
-      .data([cadScore])
-      .attr("cy", function(d) { return yScale(d) })
-
-     //add the cadScore to the header
-     d3.select("#cadScore").text(cadScore);
+      .data([Template.instance().cadScore.get()])
+      .attr("y", function(d) { return yScale(d) })
   }
 
-  function updateEscscore(age, gender, angina) {
-    escScore = ESCRisk(age, gender, angina)
+  function updateEscscore() {
+    Template.instance().escScore.set(ESCRisk(Template.instance().age.get(), Template.instance().gender.get(), Template.instance().angina.get()))
 
     svg.select(".escScoreBar")
-      .data([escScore])
-      .attr("cy", function(d) { return yScale(d); })
-
-     //add the cadScore to the header
-     d3.select("#escScore").text(escScore);
+      .data([Template.instance().escScore.get()])
+      .attr("y", function(d) { return yScale(d); })
   }
 })
 
 Template.Calculator.events({
   'change input[name="gender"]'(event, template) {
     template.gender.set(getValueFromRadioButton("gender"));
-    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+    //could remove the below and put them into the global function...
+    update();
   },
   'change input[name="angina"]'(event, template) {
     template.angina.set(getValueFromRadioButton("angina"));
-    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+    update();
   },
   'change input[name="troponinAssay"]'(event, template) {
     template.assay.set(getValueFromRadioButton("troponinAssay"));
-    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+    update();
   },
   'input #age'(event, template) {
     template.age.set(event.target.value)
-    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+    update();
   },
   'input #tni'(event, template) {
     template.tni.set(event.target.value)
-    update(template.age.get(), template.gender.get(), template.angina.get(), template.tni.get(), template.assay.get());
+    update();
   }
 });
 
 Template.Calculator.helpers({
-
+  age: () => {
+    return Template.instance().age.get()
+  },
+  gender: () => {
+    return Template.instance().gender.get()
+  },
+  angina: () => {
+    return Template.instance().angina.get()
+  },
+  tni: () => {
+    return Template.instance().tni.get()
+  },
+  assay: () => {
+    return Template.instance().assay.get()
+  },
+  cadScore: () => {
+    return Template.instance().cadScore.get()
+  },
+  escScore: () => {
+    return Template.instance().escScore.get()
+  }
 })
