@@ -1,8 +1,8 @@
 <template name="Calculator">
     <div class="container">
       <div class="row">
-      <div class="insert-space-big-screen hidden-xs hidden-sm"></div>
       <div class="col-sm-4 top-buffer">
+      <div class="insert-space-big-screen hidden-xs hidden-sm"></div>
 
         <div class="form-group">
           <div>
@@ -10,7 +10,17 @@
               Age (years): {{age}}
             </label>
           </div>
-          <input type="range" min="20" max="90" value="50" step="1" id="age">
+          <input type="range" list="ageTickmarks" min="20" max="90" value="50" step="1" id="age">
+          <datalist id="ageTickmarks">
+            <option value="20" label="20">20</option>
+            <option value="30" label="30">30</option>
+            <option value="40" label="40">40</option>
+            <option value="50" label="50">50</option>
+            <option value="60" label="60">60</option>
+            <option value="70" label="70">70</option>
+            <option value="80" label="80">80</option>
+            <option value="90" label="90">90</option>
+          </datalist>
         </div>
 
         <div class="form-group">
@@ -18,14 +28,13 @@
             Gender
           </label>
           <div class="btn-group btn-block" data-toggle="buttons">
-            <label for="gender" class="btn btn-primary col-lg-6 active">
+            <label for="gender" class="btn btn-primary col-xs-6 active">
               <input type="radio" name="gender" value="male" autocomplete="off" checked="true"> Male
             </label>
-            <label for="gender" class="btn btn-primary col-lg-6">
+            <label for="gender" class="btn btn-primary col-xs-6">
               <input type="radio" name="gender" value="female" autocomplete="off"> Female
             </label>
           </div>
-          <p class="information-text collapse" id="patientGenderInfo">This algorithm is optimised for the Abbott high-sensitivity cardiac troponin I assay with sex-specific thresholds (16 ng/L for women, 34 ng/L for men).</p>
         </div>
         <div class="form-group">
           <label for="angina" class="form-questions">
@@ -35,13 +44,13 @@
             </a>
           </label>
           <div class="btn-group btn-block" data-toggle="buttons">
-            <label for="angina" class="btn btn-primary col-lg-4 active">
+            <label for="angina" class="btn btn-primary col-xs-4 active">
               <input type="radio" name="angina" value="typical" autocomplete="off" checked> Typical<br>
             </label>
-            <label for="angina" class="btn btn-primary col-lg-4">
+            <label for="angina" class="btn btn-primary col-xs-4">
               <input type="radio" name="angina" value="atypical" autocomplete="off"> Atypical<br>
             </label>
-            <label for="angina" class="btn btn-primary col-lg-4">
+            <label for="angina" class="btn btn-primary col-xs-4">
               <input type="radio" name="angina" value="non-angina" autocomplete="off"> Non-angina<br>
             </label>
           </div>
@@ -74,14 +83,14 @@
 
         <div class="form-group">
           <label for="troponinAssay" class="form-questions">
-            Troponin Assay
+            Troponin Assay (hs-cTnI)
           </label>
           <div class="btn-group btn-block" data-toggle="buttons">
-            <label for="troponinAssay" class="btn btn-primary col-lg-6">
-              <input type="radio" name="troponinAssay" value="Abbott Architect" autocomplete="off"> Abbott Architect hs-cTnI
+            <label for="troponinAssay" class="btn btn-primary col-xs-6">
+              <input type="radio" name="troponinAssay" value="Abbott Architect" autocomplete="off"> Abbott Architect <sub>STAT</sub>
             </label>
-            <label for="troponinAssay" class="btn btn-primary col-lg-6 active">
-              <input type="radio" name="troponinAssay" value="Singulex Erenna" autocomplete="off" checked> Singulex Erenna hs-cTnI
+            <label for="troponinAssay" class="btn btn-primary col-xs-6 active">
+              <input type="radio" name="troponinAssay" value="Singulex Erenna" autocomplete="off" checked> Singulex Erenna
             </label>
           </div>
         </div>
@@ -99,8 +108,25 @@
       </div>
 
       <div class="col-sm-8 text-center">
-        <h3>Risk of Obstructive Coronary Disease: {{cadScore}}%</h3>
-        <h3>ESC Risk of Obstructive Coronary Disease: {{escScore}}%</h3>
+        <h3>Risk of Obstructive Coronary Disease</h3>
+        <div class="row">
+          <div class="col-sm-offset-3 col-sm-3 col-xs-offset-1 col-xs-5 text-center bottom-grey-border">
+            <div>
+              <h4>Scotheart</h4>
+            </div>
+            <div>
+              <h3 class="text-info">{{cadScore}}%</h3>
+            </div>
+          </div>
+          <div class="col-sm-3 col-xs-5 text-center bottom-grey-border">
+            <div>
+              <h4>ESC</h4>
+            </div>
+            <div>
+              <h3 class="text-primary">{{escScore}}%</h3>
+            </div>
+          </div>
+        </div>
         <div id="graphElement"></div>
 
       </div>

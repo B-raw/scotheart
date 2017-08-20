@@ -251,7 +251,21 @@ ul li {
   margin-top: 50px;
 }
 
-/* Graph */
-#graphElement {
+.bottom-grey-border {
+  border-bottom: 1px solid #eee;
+}
 
+/* Forms */
+.btn-primary {
+  background-color: #528dbf;
+  border-color: #337ab7;
+}
+
+.btn-primary.active {
+  background-color: #1d4b73;
+  border-color: #122b40;
+}
+
+.btn-primary.active:hover, .btn-primary:hover {
+  background-color:#183e5f;
 }

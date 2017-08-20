@@ -1,6 +1,6 @@
 export function CADRisk (age, gender, angina, tni, assay) {
   var points = 1/(1+Math.exp(-(-5.5219 + calculateAgePoints(age) + calculateGenderPoints(gender) + calculateAnginaPoints(angina) + calculateTNIPoints(tni, assay) )));
-  var pointsPercentage = Math.floor(points * 10000) / 100;
+  var pointsPercentage = Math.floor(points * 1000) / 10;
   return pointsPercentage;
 }
 

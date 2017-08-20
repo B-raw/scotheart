@@ -1,4 +1,4 @@
-  import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base'
 import { Template } from 'meteor/templating';
 import './calculator.html';
@@ -6,8 +6,6 @@ import { CADRisk } from './scotheartFormula.js'
 import { ESCRisk } from './escformula.js'
 import * as d3 from "d3";
 import { getValueFromRadioButton } from '../helpers/getValueFromRadioButton'
-
-var update;
 
 Template.Calculator.onCreated(function() {
   let cadScore = CADRisk(50, "male", "typical", 5, "Singulex Erenna")
@@ -26,6 +24,7 @@ Template.Calculator.onRendered(function() {
   var w = 400;
 	var h = 350;
   var padding = 30;
+  var logoHeight = 16
 
   var yScale = d3.scaleLinear()
                  .domain([0, 100])
@@ -52,30 +51,30 @@ Template.Calculator.onRendered(function() {
 
 // yellow background area - 15-65%
   var yellowArea = d3.select("svg")
-                    .append("rect")
-                    .attr("fill", "rgb(255, 255, 179)")
-                    .attr("x", padding)
-                    .attr("y", h - yScale(100-65))
-                    .attr("height", yScale(50) - padding)
-                    .attr("width", w - padding)
+                     .append("rect")
+                     .attr("fill", "rgb(255, 255, 179)")
+                     .attr("x", padding)
+                     .attr("y", h - yScale(100-65))
+                     .attr("height", yScale(50) - padding)
+                     .attr("width", w - padding)
 
 // orange background area 66-85%
   var orangeArea = d3.select("svg")
-                    .append("rect")
-                    .attr("fill", "rgb(255, 221, 153)")
-                    .attr("x", padding)
-                    .attr("y", h - yScale(100-85))
-                    .attr("height", yScale(80) - padding)
-                    .attr("width", w - padding)
+                     .append("rect")
+                     .attr("fill", "rgb(255, 221, 153)")
+                     .attr("x", padding)
+                     .attr("y", h - yScale(100-85))
+                     .attr("height", yScale(80) - padding)
+                     .attr("width", w - padding)
 
 // red background area - 85-100%
   var redArea = d3.select("svg")
-                    .append("rect")
-                    .attr("fill", "rgb(255, 153, 153)")
-                    .attr("x", padding)
-                    .attr("y", h - yScale(0))
-                    .attr("height", yScale(85) - padding)
-                    .attr("width", w - padding)
+                  .append("rect")
+                  .attr("fill", "rgb(255, 153, 153)")
+                  .attr("x", padding)
+                  .attr("y", h - yScale(0))
+                  .attr("height", yScale(85) - padding)
+                  .attr("width", w - padding)
 
 //attach scotheart score
   svg.selectAll("image")
@@ -83,9 +82,9 @@ Template.Calculator.onRendered(function() {
     .data([Template.instance().cadScore.get()])
     .enter()
     .append("image")
-    .attr("href", "scotheart.png")
-    .attr("x", function() { return w / 3 + 15; })
-    .attr("y", function(d) { return yScale(d); })
+    .attr("href", "scotheart-nobackground.png")
+    .attr("x", function() { return w / 3 + 15 - logoHeight; })
+    .attr("y", function(d) { return yScale(d) - logoHeight; })
     .attr("height", 32)
     .attr("width", 32)
     .attr("class", "cadScoreBar")
@@ -97,16 +96,45 @@ Template.Calculator.onRendered(function() {
     .enter()
     .append("image")
     .attr("href", "ESClogo-32x32.png")
-    .attr("x", function() { return (2 * w) / 3 + 15; })
-    .attr("y", function(d) { return yScale(d); })
-    .attr("height", 32)
-    .attr("width", 32)
+    .attr("x", function() { return (2 * w) / 3 + 15 - logoHeight; })
+    .attr("y", function(d) { return yScale(d) - logoHeight; })
+    .attr("height", 31)
+    .attr("width", 31)
     .attr("class", "escScoreBar");
 
   svg.append("g")
      .attr("class", "axis")
      .attr("transform", function() { return "translate(" + padding + ",0)"})
      .call(yAxis);
+
+  //add X axis labels
+  svg.append("text")   //add scotheart text
+    .attr("class", "x-label")
+    .attr("text-anchor", "end")
+    .attr("x", w / 3 + 60 - logoHeight)
+    .attr("y", h - 12)
+    .text("Scotheart")
+
+  // svg.append("text")   //add scotheart value
+  //    .attr("class", "x-value-cad")
+  //    .attr("text-anchor", "end")
+  //    .attr("x", w / 3 + 50 - logoHeight)
+  //    .attr("y", h)
+  //    .text(`${Template.instance().cadScore.get()}%`)
+
+  svg.append("text") //add ECS text
+    .attr("class", "x-label")
+    .attr("text-anchor", "end")
+    .attr("x", (2 * w) / 3 + 42 - logoHeight)
+    .attr("y", h - 10)
+    .text("ESC");
+
+  // svg.append("text")   //add ESC value
+  //    .attr("class", "x-value-esc")
+  //    .attr("text-anchor", "end")
+  //    .attr("x", (2 * w) / 3 + 52 - logoHeight)
+  //    .attr("y", h)
+  //    .text(`${Template.instance().escScore.get()}%`)
 
   update = function() {
     updateCadscore()
@@ -118,7 +146,10 @@ Template.Calculator.onRendered(function() {
 
     svg.select(".cadScoreBar")
       .data([Template.instance().cadScore.get()])
-      .attr("y", function(d) { return yScale(d) })
+      .attr("y", function(d) { return yScale(d) - logoHeight; })
+
+    svg.select(".x-value-cad")
+       .text(`${Template.instance().cadScore.get()}%`)
   }
 
   function updateEscscore() {
@@ -126,8 +157,13 @@ Template.Calculator.onRendered(function() {
 
     svg.select(".escScoreBar")
       .data([Template.instance().escScore.get()])
-      .attr("y", function(d) { return yScale(d); })
+      .attr("y", function(d) { return yScale(d) - logoHeight; })
+
+    svg.select(".x-value-esc")
+       .text(`${Template.instance().escScore.get()}%`)
+
   }
+
 })
 
 Template.Calculator.events({
@@ -171,9 +207,20 @@ Template.Calculator.helpers({
     return Template.instance().assay.get()
   },
   cadScore: () => {
-    return Template.instance().cadScore.get()
-  },
+    let cadScore = Template.instance().cadScore.get()
+    if (cadScore >= 10) {
+      return cadScore.toString().padEnd(4, ".0")
+    }
+    else {
+      return cadScore.toString().padEnd(3, ".0")
+    }  },
   escScore: () => {
-    return Template.instance().escScore.get()
+    let escScore = Template.instance().escScore.get()
+    if (escScore >= 10) {
+      return escScore.toString().padEnd(4, ".0")
+    }
+    else {
+      return escScore.toString().padEnd(3, ".0")
+    }
   }
 })
