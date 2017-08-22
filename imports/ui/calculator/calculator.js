@@ -21,7 +21,11 @@ Template.Calculator.onCreated(function() {
 })
 
 Template.Calculator.onRendered(function() {
-  var w = 400;
+  // if(window.innerHeight > window.innerWidth) {
+  //   alert("Please view in landscape");
+  // }
+
+  var w = 320;
 	var h = 350;
   var padding = 30;
   var logoHeight = 16
