@@ -1,159 +1,337 @@
 <template name="Calculator">
-    <div class="container">
-      <div class="row">
-      <div class="col-xs-6 col-sm-5 top-buffer">
-      <div class="insert-space-big-screen hidden-xs hidden-sm"></div>
-
-        <div class="form-group">
-          <div>
-            <label for="baselineTroponin" class="form-questions">
-              Age (years): {{age}}
-            </label>
-          </div>
-          <input type="range" list="ageTickmarks" min="20" max="90" value="50" step="1" id="age">
-          <!-- <datalist id="ageTickmarks">
-            <option value="20" label="20">20</option>
-            <option value="30" label="30">30</option>
-            <option value="40" label="40">40</option>
-            <option value="50" label="50">50</option>
-            <option value="60" label="60">60</option>
-            <option value="70" label="70">70</option>
-            <option value="80" label="80">80</option>
-            <option value="90" label="90">90</option>
-          </datalist> -->
-        </div>
-
-        <div class="form-group">
-          <label for="gender" class="form-questions">
-            Gender
-          </label>
-          <div class="btn-group btn-block" data-toggle="buttons">
-            <label for="gender" class="btn btn-primary col-xs-6 active">
-              <input type="radio" name="gender" value="male" autocomplete="off" checked="true"> Male
-            </label>
-            <label for="gender" class="btn btn-primary col-xs-6">
-              <input type="radio" name="gender" value="female" autocomplete="off"> Female
-            </label>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="angina" class="form-questions">
-            Angina Description
-            <a href="#patientAnginaInfo" data-toggle="collapse">
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </a>
-          </label>
-          <div class="btn-group btn-block" data-toggle="buttons">
-            <label for="angina" class="btn btn-primary col-xs-4 active">
-              <input type="radio" name="angina" value="typical" autocomplete="off" checked> Typical<br>
-            </label>
-            <label for="angina" class="btn btn-primary col-xs-4">
-              <input type="radio" name="angina" value="atypical" autocomplete="off"> Atypical<br>
-            </label>
-            <label for="angina" class="btn btn-primary col-xs-4">
-              <input type="radio" name="angina" value="non-angina" autocomplete="off"> Non-angina<br>
-            </label>
-          </div>
-          <div class="information-text collapse" id="patientAnginaInfo">
-            <table class="table table-striped table-responsive">
-              <tbody>
-                <tr>
-                  <td>Typical angina (definite)</td>
-                  <td>
-                    Meets all three of the following characteristics:
-                    <ul>
-                      <li>substernal chest discomfort of characteristic quality and duration;</li>
-                      <li>provoked by exertion or emotional stress;</li>
-                      <li>relieved by rest and/or nitrates within minutes.</li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Atypical angina (probable)</td>
-                  <td>Meets two of the above characteristics.</td>
-                </tr>
-                <tr>
-                  <td>Non-anginal chest pain</td>
-                  <td>Lacks or meets only one or none of the characteristics.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="troponinAssay" class="form-questions">
-            Troponin Assay (hs-cTnI)
-          </label>
-          <div class="btn-group btn-block" data-toggle="buttons">
-            <label for="troponinAssay" class="btn btn-primary col-xs-6">
-              <input type="radio" name="troponinAssay" value="Abbott Architect" autocomplete="off"> Abbott Architect <sub>STAT</sub>
-            </label>
-            <label for="troponinAssay" class="btn btn-primary col-xs-6 active">
-              <input type="radio" name="troponinAssay" value="Singulex Erenna" autocomplete="off" checked> Singulex Erenna
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="tni" class="form-questions">
-            Troponin I (ng/L): {{tni}}
-          </label>
-          <input type="range" list="tniTickmarks" min="0.1" max="15" value="5" step="0.1" id="tni">
-          <!-- <datalist id="tniTickmarks">
-            <option value="0.1" label="0.1">0.1</option>
-            <option value="3" label="3">3</option>
-            <option value="6" label="6">6</option>
-            <option value="9" label="9">9</option>
-            <option value="12" label="12">12</option>
-            <option value="15" label="15">15</option>
-          </datalist> -->
-        </div>
-        <h3>Risk of Obstructive Coronary Disease</h3>
-        <div class="row">
-          <div class="col-sm-offset-3 col-sm-3 col-xs-offset-1 col-xs-5 text-center bottom-grey-border">
-            <div>
-              <h4>Scotheart</h4>
-            </div>
-            <div>
-              <h3 class="text-info">{{cadScore}}%</h3>
-            </div>
-          </div>
-          <div class="col-sm-3 col-xs-5 text-center bottom-grey-border">
-            <div>
-              <h4>ESC</h4>
-            </div>
-            <div>
-              <h3 class="text-primary">{{escScore}}%</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-xs-6 col-sm-7 text-center">
-        <!-- <h3>Risk of Obstructive Coronary Disease</h3>
-        <div class="row">
-          <div class="col-sm-offset-3 col-sm-3 col-xs-offset-1 col-xs-5 text-center bottom-grey-border">
-            <div>
-              <h4>Scotheart</h4>
-            </div>
-            <div>
-              <h3 class="text-info">{{cadScore}}%</h3>
-            </div>
-          </div>
-          <div class="col-sm-3 col-xs-5 text-center bottom-grey-border">
-            <div>
-              <h4>ESC</h4>
-            </div>
-            <div>
-              <h3 class="text-primary">{{escScore}}%</h3>
-            </div>
-          </div>
-        </div> -->
-        <div id="graphElement"></div>
-
-      </div>
-
+  {{#if isSmallScreen}}
+    {{#if isPortraitPhone}}
+<!-- THIS BOX FOR SMALL SCREENS IN PORTRAIT -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 top-buffer">
+      <h1 class="text-center">Please turn your device to landscape for the best experience.</h1>
+      <h1 class="text-center"><small>If you are on a desktop, please widen the browser window to full screen.</small></h1>
     </div>
   </div>
+</div>
+
+    {{else}}
+<!-- THIS BOX FOR SMALL SCREENS IN LANDSCAPE -->
+<div class="container">
+  <div class="row">
+  <div class="col-xs-6 col-sm-5 top-buffer">
+    <h4 class="text-center">Risk of Obstructive Coronary Disease</h4>
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-3 col-xs-offset-1 col-xs-5 text-center bottom-grey-border">
+        <div>
+          <h4>Scotheart</h4>
+        </div>
+        <div>
+          <h3 class="text-info">{{cadScore}}%</h3>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-5 text-center bottom-grey-border">
+        <div>
+          <h4>ESC</h4>
+        </div>
+        <div>
+          <h3 class="text-primary">{{escScore}}%</h3>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div>
+        <label for="baselineTroponin" class="form-questions">
+          Age (years): {{age}}
+        </label>
+      </div>
+      <input type="range" list="ageTickmarks" min="20" max="90" value="50" step="1" id="age">
+      <!-- <datalist id="ageTickmarks">
+        <option value="20" label="20">20</option>
+        <option value="30" label="30">30</option>
+        <option value="40" label="40">40</option>
+        <option value="50" label="50">50</option>
+        <option value="60" label="60">60</option>
+        <option value="70" label="70">70</option>
+        <option value="80" label="80">80</option>
+        <option value="90" label="90">90</option>
+      </datalist> -->
+    </div>
+
+    <div class="form-group">
+      <label for="gender" class="form-questions">
+        Gender
+      </label>
+      <div class="btn-group btn-block" data-toggle="buttons">
+        <label for="gender" class="btn btn-primary col-xs-6 active">
+          <input type="radio" name="gender" value="male" autocomplete="off" checked="true"> Male
+        </label>
+        <label for="gender" class="btn btn-primary col-xs-6">
+          <input type="radio" name="gender" value="female" autocomplete="off"> Female
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="angina" class="form-questions">
+        Angina Description
+        <a href="#patientAnginaInfo" data-toggle="collapse">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+        </a>
+      </label>
+      <div class="btn-group btn-block" data-toggle="buttons">
+        <label for="angina" class="btn btn-primary col-xs-4 active">
+          <input type="radio" name="angina" value="typical" autocomplete="off" checked> Typical<br>
+        </label>
+        <label for="angina" class="btn btn-primary col-xs-4">
+          <input type="radio" name="angina" value="atypical" autocomplete="off"> Atypical<br>
+        </label>
+        <label for="angina" class="btn btn-primary col-xs-4">
+          <input type="radio" name="angina" value="non-angina" autocomplete="off"> Non-angina<br>
+        </label>
+      </div>
+      <div class="information-text collapse" id="patientAnginaInfo">
+        <table class="table table-striped table-responsive">
+          <tbody>
+            <tr>
+              <td>Typical angina (definite)</td>
+              <td>
+                Meets all three of the following characteristics:
+                <ul>
+                  <li>substernal chest discomfort of characteristic quality and duration;</li>
+                  <li>provoked by exertion or emotional stress;</li>
+                  <li>relieved by rest and/or nitrates within minutes.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>Atypical angina (probable)</td>
+              <td>Meets two of the above characteristics.</td>
+            </tr>
+            <tr>
+              <td>Non-anginal chest pain</td>
+              <td>Lacks or meets only one or none of the characteristics.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="troponinAssay" class="form-questions">
+        Troponin Assay (hs-cTnI)
+      </label>
+      <div class="btn-group btn-block" data-toggle="buttons">
+        <label for="troponinAssay" class="btn btn-primary col-xs-6">
+          <input type="radio" name="troponinAssay" value="Abbott Architect" autocomplete="off"> Abbott Architect <sub>STAT</sub>
+        </label>
+        <label for="troponinAssay" class="btn btn-primary col-xs-6 active">
+          <input type="radio" name="troponinAssay" value="Singulex Erenna" autocomplete="off" checked> Singulex Erenna
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tni" class="form-questions">
+        Troponin I (ng/L): {{tni}}
+      </label>
+      <input type="range" list="tniTickmarks" min="0.1" max="15" value="5" step="0.1" id="tni">
+      <!-- <datalist id="tniTickmarks">
+        <option value="0.1" label="0.1">0.1</option>
+        <option value="3" label="3">3</option>
+        <option value="6" label="6">6</option>
+        <option value="9" label="9">9</option>
+        <option value="12" label="12">12</option>
+        <option value="15" label="15">15</option>
+      </datalist> -->
+    </div>
+  </div>
+
+  <div class="col-xs-6 col-sm-7 text-center">
+    <!-- <h3>Risk of Obstructive Coronary Disease</h3>
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-3 col-xs-offset-1 col-xs-5 text-center bottom-grey-border">
+        <div>
+          <h4>Scotheart</h4>
+        </div>
+        <div>
+          <h3 class="text-info">{{cadScore}}%</h3>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-5 text-center bottom-grey-border">
+        <div>
+          <h4>ESC</h4>
+        </div>
+        <div>
+          <h3 class="text-primary">{{escScore}}%</h3>
+        </div>
+      </div>
+    </div> -->
+      <div class="insert-space-big-screen hidden-xs hidden-sm"></div>
+      <div id="graphElement"></div>
+
+    </div>
+
+  </div>
+</div>
+<p>Small Screen Landscape</p>
+
+    {{/if}}
+  {{else}}
+<!-- THIS BOX FOR LARGE SCREENS -->
+<div class="container">
+  <div class="row">
+  <div class="col-xs-6 col-sm-5 top-buffer">
+    <h4 class="text-center">Risk of Obstructive Coronary Disease</h4>
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-3 col-xs-offset-1 col-xs-5 text-center bottom-grey-border">
+        <div>
+          <h4>Scotheart</h4>
+        </div>
+        <div>
+          <h3 class="text-info">{{cadScore}}%</h3>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-5 text-center bottom-grey-border">
+        <div>
+          <h4>ESC</h4>
+        </div>
+        <div>
+          <h3 class="text-primary">{{escScore}}%</h3>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div>
+        <label for="baselineTroponin" class="form-questions">
+          Age (years): {{age}}
+        </label>
+      </div>
+      <input type="range" list="ageTickmarks" min="20" max="90" value="50" step="1" id="age">
+      <!-- <datalist id="ageTickmarks">
+        <option value="20" label="20">20</option>
+        <option value="30" label="30">30</option>
+        <option value="40" label="40">40</option>
+        <option value="50" label="50">50</option>
+        <option value="60" label="60">60</option>
+        <option value="70" label="70">70</option>
+        <option value="80" label="80">80</option>
+        <option value="90" label="90">90</option>
+      </datalist> -->
+    </div>
+
+    <div class="form-group">
+      <label for="gender" class="form-questions">
+        Gender
+      </label>
+      <div class="btn-group btn-block" data-toggle="buttons">
+        <label for="gender" class="btn btn-primary col-xs-6 active">
+          <input type="radio" name="gender" value="male" autocomplete="off" checked="true"> Male
+        </label>
+        <label for="gender" class="btn btn-primary col-xs-6">
+          <input type="radio" name="gender" value="female" autocomplete="off"> Female
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="angina" class="form-questions">
+        Angina Description
+        <a href="#patientAnginaInfo" data-toggle="collapse">
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+        </a>
+      </label>
+      <div class="btn-group btn-block" data-toggle="buttons">
+        <label for="angina" class="btn btn-primary col-xs-4 active">
+          <input type="radio" name="angina" value="typical" autocomplete="off" checked> Typical<br>
+        </label>
+        <label for="angina" class="btn btn-primary col-xs-4">
+          <input type="radio" name="angina" value="atypical" autocomplete="off"> Atypical<br>
+        </label>
+        <label for="angina" class="btn btn-primary col-xs-4">
+          <input type="radio" name="angina" value="non-angina" autocomplete="off"> Non-angina<br>
+        </label>
+      </div>
+      <div class="information-text collapse" id="patientAnginaInfo">
+        <table class="table table-striped table-responsive">
+          <tbody>
+            <tr>
+              <td>Typical angina (definite)</td>
+              <td>
+                Meets all three of the following characteristics:
+                <ul>
+                  <li>substernal chest discomfort of characteristic quality and duration;</li>
+                  <li>provoked by exertion or emotional stress;</li>
+                  <li>relieved by rest and/or nitrates within minutes.</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td>Atypical angina (probable)</td>
+              <td>Meets two of the above characteristics.</td>
+            </tr>
+            <tr>
+              <td>Non-anginal chest pain</td>
+              <td>Lacks or meets only one or none of the characteristics.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="troponinAssay" class="form-questions">
+        Troponin Assay (hs-cTnI)
+      </label>
+      <div class="btn-group btn-block" data-toggle="buttons">
+        <label for="troponinAssay" class="btn btn-primary col-xs-6">
+          <input type="radio" name="troponinAssay" value="Abbott Architect" autocomplete="off"> Abbott Architect <sub>STAT</sub>
+        </label>
+        <label for="troponinAssay" class="btn btn-primary col-xs-6 active">
+          <input type="radio" name="troponinAssay" value="Singulex Erenna" autocomplete="off" checked> Singulex Erenna
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tni" class="form-questions">
+        Troponin I (ng/L): {{tni}}
+      </label>
+      <input type="range" list="tniTickmarks" min="0.1" max="15" value="5" step="0.1" id="tni">
+      <!-- <datalist id="tniTickmarks">
+        <option value="0.1" label="0.1">0.1</option>
+        <option value="3" label="3">3</option>
+        <option value="6" label="6">6</option>
+        <option value="9" label="9">9</option>
+        <option value="12" label="12">12</option>
+        <option value="15" label="15">15</option>
+      </datalist> -->
+    </div>
+  </div>
+
+  <div class="col-xs-6 col-sm-7 text-center">
+    <!-- <h3>Risk of Obstructive Coronary Disease</h3>
+    <div class="row">
+      <div class="col-sm-offset-3 col-sm-3 col-xs-offset-1 col-xs-5 text-center bottom-grey-border">
+        <div>
+          <h4>Scotheart</h4>
+        </div>
+        <div>
+          <h3 class="text-info">{{cadScore}}%</h3>
+        </div>
+      </div>
+      <div class="col-sm-3 col-xs-5 text-center bottom-grey-border">
+        <div>
+          <h4>ESC</h4>
+        </div>
+        <div>
+          <h3 class="text-primary">{{escScore}}%</h3>
+        </div>
+      </div>
+    </div> -->
+    <div class="insert-space-big-screen hidden-xs hidden-sm"></div>
+    <div id="graphElement"></div>
+
+  </div>
+
+</div>
+</div>
+<p>Large Screen</p>
+
+
+  {{/if}}
 </template>

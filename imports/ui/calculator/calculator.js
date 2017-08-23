@@ -7,6 +7,9 @@ import { ESCRisk } from './escformula.js'
 import * as d3 from "d3";
 import { getValueFromRadioButton } from '../helpers/getValueFromRadioButton'
 
+var onWindowResize, throttledOnWindowResize;
+const SMALLSCREENWIDTH = 737
+
 Template.Calculator.onCreated(function() {
   let cadScore = CADRisk(50, "male", "typical", 5, "Singulex Erenna")
   let escScore = ESCRisk(50, "male", "typical", 5)
@@ -18,15 +21,39 @@ Template.Calculator.onCreated(function() {
   this.assay = new ReactiveVar( "Singulex Erenna" );
   this.cadScore = new ReactiveVar( cadScore )
   this.escScore = new ReactiveVar( escScore)
+  this.portraitOrientation = new ReactiveVar( window.innerHeight > window.innerWidth );
+
+  onWindowResize = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    // doSomethingCool(width, height);
+    console.log (`width: ${width}, height: ${height}`)
+    this.portraitOrientation.set( height > width )
+    console.log("portrait is", this.portraitOrientation.get())
+    BlazeLayout.reset()
+    BlazeLayout.render("mainLayout", { content: "Calculator" });
+  };
+
+  throttledOnWindowResize = _.throttle(onWindowResize, 200, {
+    leading: false
+  });
 })
 
 Template.Calculator.onRendered(function() {
-  // if(window.innerHeight > window.innerWidth) {
-  //   alert("Please view in landscape");
-  // }
+  var w, h;
 
-  var w = 320;
-	var h = 350;
+  if( (window.innerWidth > window.innerHeight) && window.innerWidth < SMALLSCREENWIDTH  ) {
+    console.log("small screen in landscape");
+    w = 290;
+  	h = 350;
+  }
+  else {
+    console.log("any screen in landscape or small in portrait")
+    w = 400;
+  	h = 400;
+  }
+
+
   var padding = 30;
   var logoHeight = 16
 
@@ -191,6 +218,9 @@ Template.Calculator.events({
   'input #tni'(event, template) {
     template.tni.set(event.target.value)
     update();
+  },
+  'resize'(event, template) {
+    template.portraitOrientation.set( window.innerHeight > window.innerWidth );
   }
 });
 
@@ -226,5 +256,21 @@ Template.Calculator.helpers({
     else {
       return escScore.toString().padEnd(3, ".0")
     }
+  },
+  isPortraitPhone: () => {
+    console.log(Template.instance().portraitOrientation.get())
+    return Template.instance().portraitOrientation.get()
+  },
+  isSmallScreen: () => {
+    return window.innerWidth < SMALLSCREENWIDTH
   }
 })
+
+//window resize logic
+Template.Calculator.onRendered(function() {
+  $(window).resize(throttledOnWindowResize);
+});
+
+Template.Calculator.onDestroyed(function() {
+  $(window).off('resize', throttledOnWindowResize);
+});

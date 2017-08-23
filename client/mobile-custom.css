@@ -29,7 +29,7 @@
   }
 }
 
-@media screen and (orientation:landscape) {
+@media screen and (max-width: 670px) and (orientation:landscape) {
   .navbar {
     margin-bottom: 4px;
   }
