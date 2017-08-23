@@ -8,7 +8,7 @@ import * as d3 from "d3";
 import { getValueFromRadioButton } from '../helpers/getValueFromRadioButton'
 
 var onWindowResize, throttledOnWindowResize;
-const SMALLSCREENWIDTH = 737
+const SMALLSCREENWIDTH = 767
 
 Template.Calculator.onCreated(function() {
   let cadScore = CADRisk(50, "male", "typical", 5, "Singulex Erenna")
@@ -42,7 +42,7 @@ Template.Calculator.onCreated(function() {
 Template.Calculator.onRendered(function() {
   var w, h;
 
-  if( (window.innerWidth > window.innerHeight) && window.innerWidth < SMALLSCREENWIDTH  ) {
+  if( (window.innerWidth > window.innerHeight) && (window.innerWidth <= SMALLSCREENWIDTH) ) {
     console.log("small screen in landscape");
     w = 290;
   	h = 350;
@@ -262,7 +262,7 @@ Template.Calculator.helpers({
     return Template.instance().portraitOrientation.get()
   },
   isSmallScreen: () => {
-    return window.innerWidth < SMALLSCREENWIDTH
+    return window.innerWidth <= SMALLSCREENWIDTH
   }
 })
 
