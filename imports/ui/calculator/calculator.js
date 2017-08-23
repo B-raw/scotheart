@@ -9,6 +9,7 @@ import { getValueFromRadioButton } from '../helpers/getValueFromRadioButton'
 
 var onWindowResize, throttledOnWindowResize;
 const SMALLSCREENWIDTH = 767
+const GRAPHLEGENDRATIO = 0.81
 
 Template.Calculator.onCreated(function() {
   let cadScore = CADRisk(50, "male", "typical", 5, "Singulex Erenna")
@@ -44,7 +45,7 @@ Template.Calculator.onRendered(function() {
 
   if( (window.innerWidth > window.innerHeight) && (window.innerWidth <= SMALLSCREENWIDTH) ) {
     console.log("small screen in landscape");
-    w = 290;
+    w = 270;
   	h = 350;
   }
   else {
@@ -106,6 +107,60 @@ Template.Calculator.onRendered(function() {
                   .attr("y", h - yScale(0))
                   .attr("height", yScale(85) - padding)
                   .attr("width", w - padding)
+
+  svg.append("text")   //add scotheart text
+    .attr("text-anchor", "start")
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.875)
+    //green text legend
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.8625)
+    .text("0-15%")
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.9)
+    .text("No tests")
+    //yellow text legend
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.7)
+    .text("15-65%")
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.7375)
+    .text("Exercise")
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.775)
+    .text("Test")
+    //orange text legend
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.275)
+    .text("65-85%")
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.3125)
+    .text("Stress")
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.35)
+    .text("Imaging")
+    //red text legend
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.1175)
+    .text("85-100%")
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.155)
+    .text("No tests")
+    .append('svg:tspan')
+    .attr("x", GRAPHLEGENDRATIO * w)
+    .attr("y", h * 0.1925)
+    .text("(CAD)")
+
 
 //attach scotheart score
   svg.selectAll("image")

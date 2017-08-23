@@ -269,3 +269,40 @@ ul li {
 .btn-primary.active:hover, .btn-primary:hover {
   background-color:#183e5f;
 }
+
+/* Graph Key */
+
+.graph-key {
+
+}
+
+.key-box {
+  width: 10px;
+  height: 10px;
+  display: inline-block;;
+}
+
+.graph-key h4 {
+  margin: 0;
+}
+
+.graph-key p {
+  display: inline-block;
+  margin: 0;
+}
+
+.red-box {
+  background-color: red;
+}
+
+.orange-box {
+  background-color: orange;
+}
+
+.yellow-box {
+  background-color: yellow;
+}
+
+.green-box {
+  background-color: rgb(173, 235, 173);
+}
