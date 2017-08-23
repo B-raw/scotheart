@@ -273,22 +273,29 @@ ul li {
 /* Graph Key */
 
 .graph-key {
-
+  border: 1px solid grey;
+  padding-bottom: 5px;
 }
 
 .key-box {
   width: 10px;
   height: 10px;
-  display: inline-block;;
+  display: inline-block;
 }
 
 .graph-key h4 {
-  margin: 0;
+  margin: 0 0 3px 0;
 }
 
 .graph-key p {
-  display: inline-block;
+  display: inline;
+  word-wrap: break-word;
   margin: 0;
+
+}
+
+.legend-box-plus-text {
+  margin: -3px;
 }
 
 .red-box {

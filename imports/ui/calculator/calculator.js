@@ -41,19 +41,22 @@ Template.Calculator.onCreated(function() {
 })
 
 Template.Calculator.onRendered(function() {
-  var w, h;
+  var w, h, isSmallScreen;
 
-  if( (window.innerWidth > window.innerHeight) && (window.innerWidth <= SMALLSCREENWIDTH) ) {
-    console.log("small screen in landscape");
-    w = 270;
-  	h = 350;
+  if (window.innerWidth <= SMALLSCREENWIDTH) {
+    isSmallScreen = true;
+  } else {
+    isSmallScreen = false;
+  }
+
+  if ((window.innerWidth > window.innerHeight) && isSmallScreen) {
+    w = window.innerWidth / 2 - 20;
+    h = 350;
   }
   else {
-    console.log("any screen in landscape or small in portrait")
     w = 400;
-  	h = 400;
+    h = 400;
   }
-
 
   var padding = 30;
   var logoHeight = 16
@@ -108,58 +111,62 @@ Template.Calculator.onRendered(function() {
                   .attr("height", yScale(85) - padding)
                   .attr("width", w - padding)
 
-  svg.append("text")   //add scotheart text
-    .attr("text-anchor", "start")
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.875)
-    //green text legend
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.8625)
-    .text("0-15%")
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.9)
-    .text("No tests")
-    //yellow text legend
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.7)
-    .text("15-65%")
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.7375)
-    .text("Exercise")
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.775)
-    .text("Test")
-    //orange text legend
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.275)
-    .text("65-85%")
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.3125)
-    .text("Stress")
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.35)
-    .text("Imaging")
-    //red text legend
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.1175)
-    .text("85-100%")
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.155)
-    .text("No tests")
-    .append('svg:tspan')
-    .attr("x", GRAPHLEGENDRATIO * w)
-    .attr("y", h * 0.1925)
-    .text("(CAD)")
+// attaches legend directly onto graph if is a small screen
+  if (isSmallScreen) {
+    svg.append("text")   //add scotheart text
+      .attr("text-anchor", "start")
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.875)
+      //green text legend
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.8625)
+      .text("0-15%")
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.9)
+      .text("No tests")
+      //yellow text legend
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.7)
+      .text("15-65%")
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.7375)
+      .text("Exercise")
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.775)
+      .text("Test")
+      //orange text legend
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.275)
+      .text("65-85%")
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.3125)
+      .text("Stress")
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.35)
+      .text("Imaging")
+      //red text legend
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.1175)
+      .text("85-100%")
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.155)
+      .text("No tests")
+      .append('svg:tspan')
+      .attr("x", GRAPHLEGENDRATIO * w)
+      .attr("y", h * 0.1925)
+      .text("(CAD)")
+
+  }
 
 
 //attach scotheart score
