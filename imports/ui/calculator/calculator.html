@@ -13,7 +13,7 @@
 
     {{else}}
 <!-- THIS BOX FOR SMALL SCREENS IN LANDSCAPE -->
-<div class="container">
+<div class="mobile-text-size container">
   <div class="row">
     <div class="col-xs-6 col-sm-5 top-buffer">
       <h4 class="text-center">Risk of Obstructive Coronary Disease</h4>
@@ -147,8 +147,16 @@
       <div id="graphElement"></div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-12">
+      {{> SCOTHEARTInformationPanel}}
+    </div>
+  </div>
+
 </div>
-<p>Small Screen Landscape</p>
+
+<!-- <p>Small Screen Landscape</p> -->
 
     {{/if}}
   {{else}}
@@ -261,6 +269,8 @@
         <option value="15" label="15">15</option>
       </datalist> -->
     </div>
+
+    {{> SCOTHEARTInformationPanel}}
   </div>
 
   <div class="col-xs-6 col-sm-7 text-center">
@@ -307,7 +317,7 @@
 
 </div>
 </div>
-<p>Large Screen</p>
+<!-- <p>Large Screen</p> -->
 
 
   {{/if}}

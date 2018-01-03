@@ -16,3 +16,4 @@ import '../funding/funding.js';
 import '../definition/definition.js';
 import '../contact/contact.js';
 import '../calculator/calculator.js';
+import '../scotheartInformationPanel/scotheartInformationPanel.js'

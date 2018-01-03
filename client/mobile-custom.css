@@ -34,7 +34,7 @@
     margin-bottom: 4px;
   }
 
-  .main-layout * {
+  .main-layout .mobile-text-size * {
     font-size: 12px;
   }
 

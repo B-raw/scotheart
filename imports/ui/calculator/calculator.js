@@ -188,11 +188,11 @@ Template.Calculator.onRendered(function() {
     .data([Template.instance().escScore.get()])
     .enter()
     .append("image")
-    .attr("xlink:href", "ESClogo-32x32.png")
+    .attr("xlink:href", "Heart-icon32.png")
     .attr("x", function() { return (2 * w) / 3 + 15 - logoHeight; })
     .attr("y", function(d) { return yScale(d) - logoHeight; })
-    .attr("height", 31)
-    .attr("width", 31)
+    .attr("height", 28)
+    .attr("width", 28)
     .attr("class", "escScoreBar");
 
   svg.append("g")
@@ -304,20 +304,11 @@ Template.Calculator.helpers({
   },
   cadScore: () => {
     let cadScore = Template.instance().cadScore.get()
-    if (cadScore >= 10) {
-      return cadScore.toString().padEnd(4, ".0")
-    }
-    else {
-      return cadScore.toString().padEnd(3, ".0")
-    }  },
+    return cadScore.toString()
+  },
   escScore: () => {
     let escScore = Template.instance().escScore.get()
-    if (escScore >= 10) {
-      return escScore.toString().padEnd(4, ".0")
-    }
-    else {
-      return escScore.toString().padEnd(3, ".0")
-    }
+    return escScore.toString()
   },
   isPortraitPhone: () => {
     console.log(Template.instance().portraitOrientation.get())

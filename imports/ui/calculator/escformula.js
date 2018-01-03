@@ -1,6 +1,6 @@
 export function ESCRisk(age, gender, angina, tni) {
   var points = 1/(1+Math.exp(-(-4.37 + calculateAgePoints(age) + calculateGenderPoints(gender) + calculateAnginaPoints(angina))));
-  var pointsPercentage = Math.floor(points * 1000) / 10;
+  var pointsPercentage = Math.floor(points * 100);
   return pointsPercentage;
 }
 
