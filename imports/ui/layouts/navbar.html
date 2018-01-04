@@ -27,18 +27,6 @@
             </li>
             <li class="{{ isActive 'contact' }}"><a href="/contact" id="contact" data-toggle="collapse" data-target=".navbar-collapse">Contact</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
-            {{#if currentUser}}
-              <li><a href="/cases" class="{{ isActive 'my-cases' }}">My Cases</a></li>
-              <!-- <li><a href="#" class="{{ isActive 'my-account' }}" id="my-account">My Account</a></li> -->
-              <li><a href="#" id="logout">Log Out</a></li>
-            {{else}}
-              <li class="{{ isActive 'login' }}"><a href="/login" id="login">Log In</a></li>
-              <!-- <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li> -->
-              <li class="{{ isActive 'signup' }}"><a href="/signup" id="signup">Sign Up</a></li>
-            {{/if}}
-
-          </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
